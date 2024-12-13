@@ -20,6 +20,8 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+// claculate the average function
+
 function calculateAverage(grades) {
     const sum = grades.reduce((total, grade) => total + grade, 0);
     return sum / grades.length;
@@ -31,7 +33,7 @@ let count=0;
 function askForGrade() {
     if (count < 4) {
         rl.question(`Enter grade ${count + 1}: `, (input) => {
-            const grade = parseFloat(input);
+            const grade = parseFloat(input);  //parseFloat change the input string to number
             if (isNaN(grade)) {
                 console.log("Invalid input. Please enter a valid number.");
             } else {
