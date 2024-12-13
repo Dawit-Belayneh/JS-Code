@@ -8,14 +8,44 @@
 //calculate the average point
 // output the average score
 
-function calculateGrade(c,python,js,php ){
-     let average= (c+python+js+php)/4;
-     console.log(`Your score: ${average}`)
-     return average;
-}
+
 
 // const grade = [a = 4, aMinus=3.75, bPlus=3.5, b =3.25, bMinus=3 , cPlus = 2.75 , c=2.5, cMinus=2.25, d=2];
 
-calculateGrade(3,10,5,2);
 
+const readline = require('readline');
 
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function calculateAverage(grades) {
+    const sum = grades.reduce((total, grade) => total + grade, 0);
+    return sum / grades.length;
+}
+
+let grades=[];
+let count=0;
+
+function askForGrade() {
+    if (count < 4) {
+        rl.question(`Enter grade ${count + 1}: `, (input) => {
+            const grade = parseFloat(input);
+            if (isNaN(grade)) {
+                console.log("Invalid input. Please enter a valid number.");
+            } else {
+                grades.push(grade);
+                count++;
+            }
+            askForGrade();
+        });
+    } else {
+        const average = calculateAverage(grades);
+        console.log(`The average score is: ${average.toFixed(2)}`);
+        rl.close();
+    }
+}
+
+// Start the input process
+askForGrade();
